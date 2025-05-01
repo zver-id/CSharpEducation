@@ -7,28 +7,19 @@ class Program
     static void Main(string[] args)
     {
         var game = new Board();
-        game.DrawBoard();
-    }
-}
-
-class Board
-{
-    char[,] board = {{'1', '2', '3'}, {'4', '5', '6'}, {'7', '8', '9'}};
-
-    public void DrawBoard()
-    {
-        Console.WriteLine("_____________");
-        for (var i = 0; i < 3; i++)
+        while (true)
         {
-            Console.Write("| ");
-            for (var j = 0; j < 3; j++)
+            game.DrawBoard();
+            Console.WriteLine("Введите номер ячейки");
+            var input = Console.ReadLine();
+            if (game.InputIsValid(input, out var position))
             {
-                Console.Write(board[i, j]);
-                Console.Write(" | ");
+                game.SetMark(position, "X");
             }
-            Console.Write("\n\r");
-            Console.WriteLine("_____________");
+            else
+            {
+                Console.WriteLine("Вы ввели что-то не то");
+            }
         }
     }
-    
 }
