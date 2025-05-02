@@ -16,7 +16,7 @@ class Program
         while (true)
         {
             board.DrawBoard();
-            Console.WriteLine("Введи номер ячейки");
+            Console.Write($"Ход {currentPlayer.Mark}:");
             string input = Console.ReadLine();
             if (board.InputIsValid(input, out int position))
             {
