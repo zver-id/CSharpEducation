@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TicTacToe;
 
@@ -6,18 +7,18 @@ class Program
 {
     static void Main(string[] args)
     {
-        var board = new Board();
-        var playerX = new Player("X");
-        var playerO = new Player("O");
-        var currentPlayer = playerX;
-        var inActivePlayer = playerO;
+        Board board = new Board();
+        Player playerX = new Player("X");
+        Player playerO = new Player("O");
+        Player currentPlayer = playerX;
+        Player inActivePlayer = playerO;
         Console.WriteLine("Привет! Я хочу поиграть с тобой в одну игру");
         while (true)
         {
             board.DrawBoard();
             Console.WriteLine("Введи номер ячейки");
-            var input = Console.ReadLine();
-            if (board.InputIsValid(input, out var position))
+            string input = Console.ReadLine();
+            if (board.InputIsValid(input, out int position))
             {
                 board.SetMark(position, currentPlayer.Mark);
                 inActivePlayer.RemoveWinCombination(input);
@@ -25,6 +26,13 @@ class Program
             else
             {
                 Console.WriteLine("Вы ввели что-то не то");
+            }
+            
+            if (currentPlayer.IsWin(board))
+            {
+                Console.WriteLine($"Игрок {currentPlayer.Mark} выиграл!");
+                board.DrawBoard();
+                break;
             }
 
             if (!currentPlayer.CanWin() && !inActivePlayer.CanWin())

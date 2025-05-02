@@ -2,7 +2,7 @@
 
 namespace TicTacToe;
 
-class Board
+public class Board
 {
     string[,] board = {{"1", "2", "3"}, {"4", "5", "6"}, {"7", "8", "9"}};
 
@@ -27,6 +27,13 @@ class Board
         var row = (position - 1) / 3;
         var positionInRow = position - 1 - row*3;
         board[row, positionInRow] = mark;
+    }
+
+    public string GetCellValue(int position)
+    {
+        var row = (position - 1) / 3;
+        var positionInRow = position - 1 - row * 3;
+        return board[row, positionInRow];
     }
 
     public bool InputIsValid(string numberOfCell, out int position)

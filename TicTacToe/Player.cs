@@ -44,4 +44,18 @@ public class Player
     {
         return WinCombinations.Count > 0;
     }
+
+    public bool IsWin(Board board)
+    {
+        foreach (var winCombination in WinCombinations)
+        {
+            for(int i = 0; i < winCombination.Length; i++)
+            {
+                var currentCell = board.GetCellValue(int.Parse(winCombination[i]));
+                if(board.GetCellValue(int.Parse(winCombination[i])) != Mark) break;
+                if (i == winCombination.Length - 1) return true;
+            }
+        }
+        return false;
+    }
 }
