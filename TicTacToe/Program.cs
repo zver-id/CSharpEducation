@@ -16,18 +16,22 @@ class Program
         while (true)
         {
             board.DrawBoard();
-            Console.Write($"Ход {currentPlayer.Mark}:");
-            string input = Console.ReadLine();
-            if (board.InputIsValid(input, out int position))
+            while (true)
             {
-                board.SetMark(position, currentPlayer.Mark);
-                inActivePlayer.RemoveWinCombination(input);
+                Console.Write($"Ход {currentPlayer.Mark}:");
+                string input = Console.ReadLine();
+                if (board.InputIsValid(input, out int position))
+                {
+                    board.SetMark(position, currentPlayer.Mark);
+                    inActivePlayer.RemoveWinCombination(input);
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Вы ввели что-то не то");
+                }
             }
-            else
-            {
-                Console.WriteLine("Вы ввели что-то не то");
-            }
-            
+
             if (currentPlayer.IsWin(board))
             {
                 Console.WriteLine($"Игрок {currentPlayer.Mark} выиграл!");
